@@ -1,0 +1,28 @@
+---
+import Welcome from '../components/Welcome.astro';
+import Layout from '../layouts/Layout.astro';
+
+import type { PokemonListResponse } from '../interfaces/pokemon-list.response';
+import PokemonCard from '../components/pokemons/PokemonCard.astro';
+
+const resp = await fetch('https://pokeapi.co/api/v2/pokemon?limit=100');
+const pokemons = (await resp.json()) as PokemonListResponse;
+
+const title = 'Pokemon Static | Home';
+---
+
+<Layout title={title}>
+  <!-- <Welcome /> -->
+  <h1 class='text-3xl'>Listado de Pokemons</h1>
+  <hr />
+  <section
+    aria-label='Listado de Pokemons'
+    class='grid grid-cols-1 sm:grid-cols-4 md:grid-cols-5 gap-4 mt-5'
+  >
+    {
+      pokemons.results.map(({ name, url }) => (
+        <PokemonCard name={name} url={url} />
+      ))
+    }
+  </section>
+</Layout>
