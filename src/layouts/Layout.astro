@@ -1,4 +1,5 @@
 ---
+import NavBar from '@components/shared/NavBar.astro';
 import { ClientRouter } from 'astro:transitions';
 
 interface Props {
@@ -22,23 +23,19 @@ const { title, image, description } = Astro.props;
     <meta name='description' content={description} />
     <meta name='author' content='Vincent Benavides' />
 
-    <!-- OG Metatags -->
+    <!-- OG MetaTags -->
     <meta property='og:title' content={title} />
     <meta property='og:description' content={description} />
     <meta property='og:image' content={image} />
 
     <title>{title}</title>
 
-    <!-- <ClientRouter /> -->
+    <ClientRouter />
 
-    <style>
-      @view-transition {
-        navigation: auto; /* enabled! */
-      }
-    </style>
   </head>
-  <body class='bg-slate-800 text-slate-100 m-auto max-w-3xl'>
-    <main class='mt-10 mx-auto'>
+  <body class='bg-slate-800 text-slate-100'>
+    <NavBar />
+    <main class='mt-10  m-auto max-w-3xl'>
       <slot />
     </main>
   </body>
